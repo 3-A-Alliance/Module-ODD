@@ -7,14 +7,21 @@ var setVar = player.SetVar;
 var getVar = player.GetVar;
 window.Script5 = function()
 {
-  var url = "https://script.google.com/macros/s/AKfycbzP6DXbQie7Nrh74wf0yyaITBffZFGVaS5bmNGZvuwmDa3E1PsQyzmEN6CZ2WGjhU23lg/exec"; // Remplacez par l'URL de votre Web App
+  var url = "https://script.google.com/macros/s/AKfycbz3Un2gvYiNtSPcthtMjYzl8VYYSd1NFC7g_wY7yrofj4uIzLZUENmZaFZvQ-uXlmiSIA/exec"; // Remplacez par votre URL Web App
 
 fetch(url, { method: "POST" })
   .then(response => response.text())
   .then(data => {
     console.log("ID ajouté : " + data);
+    var player = GetPlayer();
+    player.SetVar("dernier_id", Number(data)); // Stocke l'ID dans Storyline
   })
   .catch(error => console.error("Erreur : " + error));
+  
+  
+  
+  
+  
 }
 
 window.Script6 = function()
