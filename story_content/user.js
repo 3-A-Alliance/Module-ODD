@@ -7,26 +7,50 @@ var setVar = player.SetVar;
 var getVar = player.GetVar;
 window.Script5 = function()
 {
-  var url = "https://script.google.com/macros/s/AKfycby02qp8APbB4Yi9x9nbABlxatVox7SUqQFeM5XoEKiJ6R8aWBMkQhgNbbcLY1_xqZ5QxA/exec"; // Remplacez par l'URL obtenue
+  var url = "https://script.google.com/macros/s/AKfycbzP6DXbQie7Nrh74wf0yyaITBffZFGVaS5bmNGZvuwmDa3E1PsQyzmEN6CZ2WGjhU23lg/exec"; // Remplacez par l'URL de votre Web App
+
 fetch(url, { method: "POST" })
   .then(response => response.text())
-  .then(data => console.log("Ajout réussi : " + data))
+  .then(data => {
+    console.log("ID ajouté : " + data);
+  })
   .catch(error => console.error("Erreur : " + error));
 }
 
 window.Script6 = function()
 {
-  var url = "https://script.google.com/macros/s/AKfycby02qp8APbB4Yi9x9nbABlxatVox7SUqQFeM5XoEKiJ6R8aWBMkQhgNbbcLY1_xqZ5QxA/exec"; // Même URL que ci-dessus
+  // Récupérer la date du jour
+
+var player = GetPlayer();
+var today = new Date();
+
+// Formater la date (exemple : "07/02/2025")
+var jour = today.getDate().toString().padStart(2, '0'); // Ajoute un 0 si nécessaire
+var mois = (today.getMonth() + 1).toString().padStart(2, '0'); // Janvier = 0, donc +1
+var annee = today.getFullYear();
+
+// Construire la date au format français (JJ/MM/AAAA)
+var dateFormattee = jour + "/" + mois + "/" + annee;
+
+// Stocker la date dans la variable Storyline
+player.SetVar("DateDuJour", dateFormattee);
+}
+
+window.Script7 = function()
+{
+  var url = "https://script.google.com/macros/s/AKfycbzP6DXbQie7Nrh74wf0yyaITBffZFGVaS5bmNGZvuwmDa3E1PsQyzmEN6CZ2WGjhU23lg/exec"; // Remplacez par l'URL de votre Web App
+
 fetch(url)
   .then(response => response.text())
   .then(data => {
+    console.log("Dernier ID récupéré : " + data);
     var player = GetPlayer();
-    player.SetVar("compteur", data);
+    player.SetVar("dernier_id", Number(data)); // Stocke l'ID dans Storyline
   })
   .catch(error => console.error("Erreur : " + error));
 }
 
-window.Script7 = function()
+window.Script8 = function()
 {
   var player = GetPlayer();
 var input = document.createElement("input");
@@ -43,10 +67,10 @@ input.onchange = function(event) {
 input.click();
 }
 
-window.Script8 = function()
+window.Script9 = function()
 {
   var player = GetPlayer();
-var imageData = player.GetVar("ImageStockée"); 
+var imageData = player.GetVar("ImageStocke"); 
 if (imageData) {
     var imgElement = document.getElementById("story_content").querySelector("[aria-label='ImagePlaceholder']");
     if (imgElement) {
@@ -55,7 +79,7 @@ if (imageData) {
 }
 }
 
-window.Script9 = function()
+window.Script10 = function()
 {
   // Récupérer le lecteur de Storyline
 var player = GetPlayer();
