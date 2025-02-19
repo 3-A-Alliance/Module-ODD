@@ -45,6 +45,17 @@ player.SetVar("DateDuJour", dateFormattee);
 
 window.Script7 = function()
 {
+  // Favicon
+
+var link = document.createElement("link");
+link.rel = "icon";
+link.type = "image/svg";
+link.href = "story_content/external_files/perso-parle.svg"; // Mets le bon chemin ici
+document.head.appendChild(link);
+}
+
+window.Script8 = function()
+{
   var url = "https://script.google.com/macros/s/AKfycbzP6DXbQie7Nrh74wf0yyaITBffZFGVaS5bmNGZvuwmDa3E1PsQyzmEN6CZ2WGjhU23lg/exec"; // Remplacez par l'URL de votre Web App
 
 fetch(url)
@@ -57,36 +68,7 @@ fetch(url)
   .catch(error => console.error("Erreur : " + error));
 }
 
-window.Script8 = function()
-{
-  var player = GetPlayer();
-var input = document.createElement("input");
-input.type = "file";
-input.accept = "image/*";
-input.onchange = function(event) {
-    var reader = new FileReader();
-    reader.onload = function(){
-        var imageData = reader.result;
-        player.SetVar("ImageStockée", imageData); // Stocke l'image sous forme de Data URL
-    };
-    reader.readAsDataURL(event.target.files[0]);
-};
-input.click();
-}
-
 window.Script9 = function()
-{
-  var player = GetPlayer();
-var imageData = player.GetVar("ImageStocke"); 
-if (imageData) {
-    var imgElement = document.getElementById("story_content").querySelector("[aria-label='ImagePlaceholder']");
-    if (imgElement) {
-        imgElement.src = imageData;
-    }
-}
-}
-
-window.Script10 = function()
 {
   // Récupérer le lecteur de Storyline
 var player = GetPlayer();
